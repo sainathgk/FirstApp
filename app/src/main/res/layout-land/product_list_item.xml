@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:clickable="false"
+    android:background="#ffffe3e3">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_checkBox"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/item_preview"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/abc_ratingbar_full_material"
+        android:layout_toRightOf="@+id/item_checkBox"
+        android:layout_toEndOf="@+id/item_checkBox"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Product Name"
+        android:id="@+id/item_product_name"
+        android:layout_alignBottom="@+id/item_checkBox"
+        android:layout_toRightOf="@+id/item_preview"
+        android:layout_toEndOf="@+id/item_preview"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Brand Name"
+        android:id="@+id/item_brand_name"
+        android:layout_alignTop="@+id/item_preview"
+        android:layout_toRightOf="@+id/item_preview"
+        android:layout_toEndOf="@+id/item_preview"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_product_name"
+        android:layout_toRightOf="@+id/item_preview"
+        android:layout_toEndOf="@+id/item_preview"
+        android:id="@+id/qty_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Qty"
+            android:id="@+id/qty_text"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:singleLine="true" />
+
+        <EditText
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/qty_number"
+            android:numeric="integer"
+            android:singleLine="true"
+            android:text="10"
+            android:textSize="14dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:background="@android:drawable/editbox_background_normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/pack_size_layout"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true">
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/pack_size_decr"
+            android:layout_gravity="center_vertical"
+            android:src="@android:drawable/ic_media_previous" />
+
+        <EditText
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/pack_size_number"
+            android:numeric="integer"
+            android:singleLine="true"
+            android:text="10"
+            android:textSize="14dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:background="@android:drawable/editbox_background_normal" />
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/pack_size_incr"
+            android:layout_gravity="center_vertical"
+            android:src="@android:drawable/ic_media_next" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/item_product_name"
+        android:layout_toRightOf="@+id/qty_view"
+        android:layout_toEndOf="@id/qty_view"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/price_layout"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentStart="false"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="MRP : "
+            android:id="@+id/mrp_view"
+            android:layout_alignParentTop="true"
+            android:singleLine="true"
+            android:editable="false"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Rs. 500"
+            android:id="@+id/mrp_price_view"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
+            android:singleLine="true"
+            android:visibility="visible"
+            android:editable="false"
+            android:layout_marginTop="5dp"
+            android:numeric="integer"
+            android:layout_toRightOf="@id/mrp_view"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Selling Price : "
+            android:layout_alignParentBottom="true"
+            android:id="@+id/sell_text_view"
+            android:layout_gravity="center_vertical"
+            android:editable="false"
+            android:singleLine="true"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Rs. 450"
+            android:id="@+id/sell_price_view"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:singleLine="true"
+            android:numeric="integer"
+            android:visibility="visible"
+            android:editable="false"
+            android:layout_alignTop="@+id/sell_text_view"
+            android:layout_toRightOf="@+id/sell_text_view"
+            android:layout_toEndOf="@+id/sell_text_view" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Pack Size"
+        android:id="@+id/pack_size_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:editable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Kilos"
+        android:id="@+id/pack_weight_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:layout_marginRight="35dp"
+        android:layout_alignBottom="@+id/qty_view"
+        android:layout_marginTop="5dp" />
+
+</RelativeLayout>

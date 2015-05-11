@@ -1,0 +1,50 @@
+Atta,Ashirvad,Grocery,2,100,90
+Sugar,Dabur,Grocery,1,45,43
+Jaggery,Block,Grocery,2,30,28
+Rava,Bansi,Grocery,1,40,38
+Rava,Idly,Grocery,1,55,50
+Rava,Upma,Grocery,1,45,40
+Rava,Chiroti,Grocery,2,80,78
+Dal,Channa,Grocery,1,95,94
+Ghee,Dabur,Oils & Ghee,1,250,240
+Oil,Gingelly,Oils & Ghee,1,300,290
+Oil,Groundnut,Oils & Ghee,500,48,46
+Oil,Mustard,Oils & Ghee,250,55,52
+Almonds,Nuts,Spices & Dry Fruits,200,190,185
+Anjeer,Fruits,Spices & Dry Fruits,100,90,88
+Apricot,Fruits,Spices & Dry Fruits,250,300,280
+Cardamom, Nuts,Spices & Dry Fruits,100,150,145
+Tea,Tetley,Beverages,50,65,63
+Coffee,Broke Bond,Beverages,100,105,103
+Fruit Drinks,Squash,Beverages,100,40,38
+Juices,Fruit,Beverages,50,15,15
+Soft Drinks,Pepsi,Beverages,600,35,35
+Baby Food,Pediasure,Baby Care,500,250,250
+Baby Cream,Johnson & Johnson,Baby Care,100,95,93
+Baby Lotion,Himalaya,Baby Care,100,85,80
+Baby Oil,Dabur,Baby Care,50,35,30
+Baby Shampoo,Johnson & Johnson,Baby Care,50,60,60
+Glucose Biscuits,Tiger,Biscuits & Breakfast Cereals,15,10,10
+Cream Biscuits,Oreo,Biscuits & Breakfast Cereals,20,25,25
+Marie Biscuits,Sunfeast,Biscuits & Breakfast Cereals,30,15,15
+Digestive Biscuits,Britannia,Biscuits & Breakfast Cereals,25,20,20
+Oats,Quaker,Biscuits & Breakfast Cereals,100,75,75
+Men's Deo,Fogg,Health & Personal Care,100,195,195
+Women's Deo,Layer Wattagirl,Health & Personal Care,100,210,205
+Mouth Wash,Listerene,Health & Personal Care,100,45,45
+Tooth Powder,Colgate,Health & Personal Care,150,55,50
+Tooth Brush,Oral-B,Health & Personal Care,1,35,35
+Tooth Paste,Sensitive,Health & Personal Care,100,50,50
+Liquid Detergent,Aerial,Health & Personal Care,250,150,145
+Washing Powder,Surf Excel,Health & Personal Care,500,86,79
+Dish WashBar,Exo,Health & Personal Care,50,15,15
+Aluminium Foil, ,Miscellaneous,1,30,30
+Garbage Bag,Shalimar,Miscellaneous,1,62,62
+Tissue Paper & Napkin,Popular,Miscellaneous,1,40,40
+Muesli,Kellogg's,Biscuits & Breakfast Cereals,250,200,200
+Corn Flakes,Kellogg's,Biscuits & Breakfast Cereals,250,100,95
+Noodles,Maggi,Biscuits & Breakfast Cereals,50,15,15
+Rava Idly Mix,MTR,Biscuits & Breakfast Cereals,100,40,40
+Roasted Vermicelli,Bambino,Biscuits & Breakfast Cereals,250,45,45
+Baby Wipes,Johnson & Johnson,Baby Care,100,35,35
+Baby Diaper,Pampers,Baby Care,9,199,190

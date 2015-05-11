@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item android:id="@+id/action_view_cart" android:title="@string/action_viewcart"
+        app:showAsAction="withText|ifRoom" />
+    <item android:id="@+id/action_checklist" android:title="@string/action_checklist"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_login" android:title="@string/action_login"
+        android:orderInCategory="200" app:showAsAction="never" />
+    <item android:id="@+id/action_enterData" android:title="@string/action_enterData"
+        android:orderInCategory="300" app:showAsAction="never" />
+</menu>

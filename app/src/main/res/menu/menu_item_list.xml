@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sainath.firstapp.ItemListActivity">
+
+    <item android:id="@+id/action_checkout" android:title="@string/action_checkout"
+        android:orderInCategory="100" app:showAsAction="withText|ifRoom"/>
+
+    <item android:id="@+id/action_edit_list" android:title="@string/action_edit"
+        android:orderInCategory="101" />
+
+    <item android:id="@+id/action_delete_list" android:title="@string/action_delete"
+        android:orderInCategory="102" app:showAsAction="never" />
+
+</menu>

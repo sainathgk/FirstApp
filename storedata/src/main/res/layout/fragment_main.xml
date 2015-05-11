@@ -1,0 +1,219 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Product Name"
+        android:id="@+id/product_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/product_text"
+        android:layout_alignTop="@+id/product_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="70dp"
+        android:nextFocusDown="@+id/brand_text"
+        android:background="@android:drawable/editbox_background_normal"
+        android:selectAllOnFocus="false" >
+        <requestFocus/>
+        </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Brand Name"
+        android:id="@+id/brand_name"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/product_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/brand_text"
+        android:layout_alignBottom="@+id/brand_name"
+        android:layout_alignLeft="@+id/product_text"
+        android:layout_alignStart="@+id/product_text"
+        android:nextFocusDown="@+id/category_type"
+        android:background="@android:drawable/editbox_background_normal"
+        >
+        </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Category"
+        android:id="@+id/category"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/brand_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_type"
+        android:layout_alignBottom="@+id/category"
+        android:layout_alignLeft="@+id/brand_text"
+        android:layout_alignStart="@+id/brand_text"
+        android:nextFocusDown="@+id/pack_value"
+        android:background="@android:drawable/editbox_background_normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pack Size"
+        android:id="@+id/pack_size"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/category"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/pack_value"
+        android:layout_alignBottom="@+id/pack_size"
+        android:layout_alignLeft="@+id/category_type"
+        android:layout_alignStart="@+id/category_type"
+        android:numeric="integer"
+        android:nextFocusDown="@+id/unit_value"
+        android:background="@android:drawable/editbox_background_normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Units"
+        android:id="@+id/Units"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/pack_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/unit_value"
+        android:numeric="integer"
+        android:background="@android:drawable/editbox_background_normal"
+        android:nextFocusDown="@+id/mrp_value"
+        android:layout_alignBottom="@+id/Units"
+        android:layout_alignLeft="@+id/pack_value"
+        android:layout_alignStart="@+id/pack_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="MRP"
+        android:id="@+id/mrp"
+        android:layout_marginTop="21dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/mrp_value"
+        android:numeric="integer"
+        android:background="@android:drawable/editbox_background_normal"
+        android:nextFocusDown="@+id/selling_value"
+        android:layout_alignBottom="@+id/mrp"
+        android:layout_marginTop="21dp"
+        android:layout_alignLeft="@+id/unit_value"
+        android:layout_alignStart="@+id/unit_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Selling Price"
+        android:id="@+id/selling_price"
+        android:layout_below="@+id/mrp_value"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/selling_value"
+        android:numeric="integer"
+        android:inputType="number"
+        android:background="@android:drawable/editbox_background_normal"
+        android:nextFocusDown="@+id/stock_value"
+        android:layout_alignTop="@+id/selling_price"
+        android:layout_alignLeft="@+id/mrp_value"
+        android:layout_alignStart="@+id/mrp_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Available Stock"
+        android:id="@+id/stockin"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/selling_price"
+        android:layout_alignRight="@+id/brand_name"
+        android:layout_alignEnd="@+id/brand_name" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_value"
+        android:numeric="integer"
+        android:inputType="number"
+        android:layout_alignTop="@+id/stockin"
+        android:layout_alignLeft="@+id/selling_value"
+        android:layout_alignStart="@+id/selling_value"
+        android:background="@android:drawable/editbox_background_normal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/done_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="44dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/clear_btn"
+        android:layout_alignTop="@+id/done_btn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:id="@+id/check_btn"
+        android:layout_alignTop="@+id/done_btn"
+        android:layout_alignRight="@+id/stockin"
+        android:layout_alignEnd="@+id/stockin" />
+
+</RelativeLayout>
