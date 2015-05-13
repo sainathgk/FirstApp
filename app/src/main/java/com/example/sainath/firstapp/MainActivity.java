@@ -155,20 +155,32 @@ public class MainActivity extends ActionBarActivity
 
                 if(isFirst) {
                     // Log.i("Sainath",Environment.getExternalStorageDirectory().getAbsolutePath());
-                    File testF = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Documents", "grocery.txt");//new File("groc.txt");
+                    new Runnable(){
+                        @Override
+                        public void run() {
+                            File testF = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Documents", "grocery.txt");//new File("groc.txt");
 
-                    try {
-                        Scanner sc = new Scanner(testF);
+                            try {
+                                Scanner sc = new Scanner(testF);
 
-                        while (sc.hasNextLine()) {
-                            String[] lineData = sc.nextLine().split(",");
+                                while (sc.hasNextLine()) {
+                                    String[] lineData = sc.nextLine().split(",");
 
-                            StoreDataProvider.getInstance(this.getApplicationContext()).insertValuestoStoreDB(lineData);
+                                    StoreDataProvider.getInstance(getApplicationContext()).insertValuestoStoreDB(lineData);
+                                }
+                            } catch (FileNotFoundException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Products are added to Store Database", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
-                    } catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    }.run();
+
                     isFirst = false;
                 }
                 break;
@@ -349,25 +361,6 @@ public class MainActivity extends ActionBarActivity
         @Override
         public void onResume() {
             super.onResume();
-
-            /*if(isFirst) {
-                // Log.i("Sainath",Environment.getExternalStorageDirectory().getAbsolutePath());
-                File testF = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Documents", "grocery.txt");//new File("groc.txt");
-
-                try {
-                    Scanner sc = new Scanner(testF);
-
-                    while (sc.hasNextLine()) {
-                        String[] lineData = sc.nextLine().split(",");
-
-                        StoreDataProvider.getInstance(getActivity().getApplicationContext()).insertValuestoStoreDB(lineData);
-                    }
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                isFirst = false;
-            }*/
         }
 
         private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {

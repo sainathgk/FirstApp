@@ -96,13 +96,42 @@ public class ItemListAdapter implements ListAdapter {
             ((EditText) convertView.findViewById(R.id.pack_size_number)).setText(mItemsCursor.getInt(mItemsCursor.getColumnIndex(StoreConstants.colPackSize))+"");
             ((TextView) convertView.findViewById(R.id.mrp_price_view)).setText(mItemsCursor.getString(mItemsCursor.getColumnIndex(StoreConstants.colMRP)));
             ((TextView) convertView.findViewById(R.id.sell_price_view)).setText(mItemsCursor.getString(mItemsCursor.getColumnIndex(StoreConstants.colSellingPrice)));
+
+            convertView.setTag(mItemsCursor.getInt(mItemsCursor.getColumnIndex(StoreConstants.colSerialNumber)));
         }
         else {
             ((TextView) convertView.findViewById(R.id.item_product_name)).setText("Nidhish");
             ((TextView) convertView.findViewById(R.id.item_brand_name)).setText("Sainath");
         }
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCheckout(v);
+            }
+        });
+
+        convertView.findViewById(R.id.item_checkBox).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //addToCheckout(v.getRootView());
+            }
+        });
+
         return convertView;
+    }
+
+    private void addToCheckout(View v)
+    {
+        int[] items = new int[3];
+
+        items[0] = (int) v.getTag();
+        items[1] = Integer.parseInt(((TextView) v.findViewById(R.id.qty_number)).getText().toString());
+        items[2] = Integer.parseInt(((TextView) v.findViewById(R.id.pack_size_number)).getText().toString());
+
+        StoreDataProvider.getInstance(mContext).insertItemToCheckout(items);
+
+        v.setVisibility(View.GONE);
     }
 
     @Override
@@ -125,5 +154,4 @@ public class ItemListAdapter implements ListAdapter {
         mItemsCursor.close();
         mItemsCursor = null;
     }
-
 }

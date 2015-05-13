@@ -17,6 +17,7 @@ public class StoreDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(StoreConstants.CREATE_PRODUCTS_TABLE);
         db.execSQL(StoreConstants.CREATE_VALUES_TABLE);
+        db.execSQL(StoreConstants.CREATE_CHECKOUT_ITEMS);
     }
 
     @Override
