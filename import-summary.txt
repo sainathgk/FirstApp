@@ -1,15 +1,33 @@
 ECLIPSE ANDROID PROJECT IMPORT SUMMARY
 ======================================
 
+Risky Project Location:
+-----------------------
+The tools *should* handle project locations in any directory. However,
+due to bugs, placing projects in directories containing spaces in the
+path, or characters like ", ' and &, have had issues. We're working to
+eliminate these bugs, but to save yourself headaches you may want to
+move your project to a location where this is not a problem.
+C:\Nidhish\Working Proj\FirstApp
+                  -             
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* index.html
+
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => animationsDemo\src\main\AndroidManifest.xml
-* libs\android-support-v13.jar => animationsDemo\libs\android-support-v13.jar
-* res\ => animationsDemo\src\main\res\
-* src\ => animationsDemo\src\main\java\
+* AndroidManifest.xml => downloadedImageViewerP2Assignment1\src\main\AndroidManifest.xml
+* assets\ => downloadedImageViewerP2Assignment1\src\main\assets
+* res\ => downloadedImageViewerP2Assignment1\src\main\res\
+* src\ => downloadedImageViewerP2Assignment1\src\main\java\
 
 Next Steps:
 -----------

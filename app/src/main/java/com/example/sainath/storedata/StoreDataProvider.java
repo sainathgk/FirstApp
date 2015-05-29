@@ -95,6 +95,7 @@ public class StoreDataProvider{
             values.put(StoreConstants.colUnits, 1);
             values.put(StoreConstants.colMRP, Integer.parseInt(data[4]));
             values.put(StoreConstants.colSellingPrice, Integer.parseInt(data[5]));
+            values.put(StoreConstants.colProductImage, data[6]);
             //values.put(StoreConstants.colStockAvailable, Integer.parseInt());
 
             mStoreDB.insert(StoreConstants.tableValues, null, values);
@@ -121,6 +122,7 @@ public class StoreDataProvider{
 
                 checked_items.put(StoreConstants.colMRP, cursorItem.getInt(cursorItem.getColumnIndex(StoreConstants.colMRP)));
                 checked_items.put(StoreConstants.colSellingPrice, cursorItem.getInt(cursorItem.getColumnIndex(StoreConstants.colSellingPrice)));
+                checked_items.put(StoreConstants.colProductImage, cursorItem.getString(cursorItem.getColumnIndex(StoreConstants.colProductImage)));
 
                 Long inserted = mStoreDB.insert(StoreConstants.tableCheckout, null, checked_items);
                 Toast.makeText(this.mContext, "Product is added to checkout"+inserted, Toast.LENGTH_SHORT).show();

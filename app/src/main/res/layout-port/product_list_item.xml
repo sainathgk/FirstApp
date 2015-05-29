@@ -3,29 +3,32 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:id="@+id/list_item"
     android:clickable="false"
-    android:background="#ff9dffaf">
+    android:longClickable="false"
+    android:focusable="false"
+    android:background="@android:color/white">
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_checkBox"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:layout_marginTop="10dp"
         android:layout_centerVertical="true"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/item_preview"
         android:layout_marginTop="5dp"
         android:src="@drawable/abc_ratingbar_full_material"
         android:layout_toRightOf="@+id/item_checkBox"
         android:layout_toEndOf="@+id/item_checkBox"
         android:layout_marginRight="5dp"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        android:background="@android:color/white" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +40,9 @@
         android:layout_toRightOf="@+id/item_preview"
         android:layout_toEndOf="@+id/item_preview"
         android:singleLine="true"
-        android:ellipsize="end" />
+        android:textSize="16dp"
+        android:ellipsize="end"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +54,9 @@
         android:layout_toRightOf="@+id/item_preview"
         android:layout_toEndOf="@+id/item_preview"
         android:singleLine="true"
-        android:ellipsize="end" />
+        android:textSize="20dp"
+        android:ellipsize="end"
+        android:textColor="@android:color/black" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -58,7 +65,8 @@
         android:layout_below="@+id/item_product_name"
         android:layout_toRightOf="@+id/item_preview"
         android:layout_toEndOf="@+id/item_preview"
-
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="10dp"
         android:id="@+id/qty_view">
 
         <TextView
@@ -69,9 +77,10 @@
             android:id="@+id/qty_text"
             android:gravity="center_vertical"
             android:textSize="16dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@android:color/black" />
 
-        <EditText
+        <TextView
             android:layout_width="40dp"
             android:layout_height="fill_parent"
             android:inputType="number"
@@ -83,19 +92,18 @@
             android:textSize="14dp"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:background="@android:drawable/editbox_background_normal" />
+            android:background="@android:drawable/editbox_background_normal"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
         android:id="@+id/pack_size_layout"
-        android:layout_marginRight="10dp"
-        android:layout_centerVertical="true">
+        android:layout_below="@+id/pack_size_text"
+        android:layout_alignLeft="@+id/pack_size_text"
+        android:layout_alignStart="@+id/pack_size_text">
 
         <ImageButton
             android:layout_width="20dp"
@@ -104,7 +112,7 @@
             android:layout_gravity="center_vertical"
             android:src="@android:drawable/ic_media_previous" />
 
-        <EditText
+        <TextView
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -114,9 +122,9 @@
             android:singleLine="true"
             android:text="10"
             android:textSize="14dp"
+            android:textColor="@android:color/black"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:background="#ffecb3ff"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:editable="false" />
@@ -142,7 +150,8 @@
         android:layout_alignParentBottom="false"
         android:layout_alignParentStart="false"
         android:gravity="center_vertical"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,7 +163,8 @@
             android:singleLine="true"
             android:editable="false"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,7 +179,8 @@
             android:editable="false"
             android:layout_marginTop="5dp"
             android:numeric="integer"
-            android:layout_toRightOf="@id/mrp_view"/>
+            android:layout_toRightOf="@id/mrp_view"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,7 +192,8 @@
             android:layout_gravity="center_vertical"
             android:editable="false"
             android:singleLine="true"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,7 +209,8 @@
             android:editable="false"
             android:layout_alignTop="@+id/sell_text_view"
             android:layout_toRightOf="@+id/sell_text_view"
-            android:layout_toEndOf="@+id/sell_text_view" />
+            android:layout_toEndOf="@+id/sell_text_view"
+            android:textColor="@android:color/black" />
 
     </RelativeLayout>
 
@@ -212,7 +225,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:editable="false" />
+        android:editable="false"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -220,11 +234,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Kilos"
         android:id="@+id/pack_weight_text"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:editable="false"
-        android:layout_marginRight="35dp"
-        android:layout_alignBottom="@+id/qty_view"
-        android:layout_marginTop="5dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/pack_size_layout"
+        android:layout_alignLeft="@+id/pack_size_text"
+        android:layout_marginLeft="15dp"
+        android:textColor="@android:color/black" />
 
 </RelativeLayout>

@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.HeaderViewListAdapter;
@@ -250,6 +251,7 @@ public class MainActivity extends ActionBarActivity
             final ListView itemList = (ListView) rootView.findViewById(R.id.ItemslistView);
 
             mListAdapter = new ItemListAdapter(this.getActivity().getApplicationContext(), (LayoutInflater)this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+            mListAdapter.setListType("selectable");
 
             // Instantiate a ViewPager and a PagerAdapter.
             mPager = (ViewPager) rootView.findViewById(R.id.home_screen_offer_viewer);
@@ -289,7 +291,22 @@ public class MainActivity extends ActionBarActivity
                 }
             });
 
-            //itemList.setAdapter(new HeaderViewListAdapter());
+            itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    int[] items = new int[3];
+
+                    items[0] = (int) view.getTag();
+                    items[1] = Integer.parseInt(((TextView) view.findViewById(R.id.qty_number)).getText().toString());
+                    items[2] = Integer.parseInt(((TextView) view.findViewById(R.id.pack_size_number)).getText().toString());
+
+                    StoreDataProvider.getInstance(getActivity().getApplicationContext()).insertItemToCheckout(items);
+
+                    itemList.removeView(view);
+                    itemList.invalidate();
+                }
+            });
 
             searchItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override

@@ -5,7 +5,11 @@
 
     <ListView android:id="@android:id/list" android:layout_width="match_parent"
         android:layout_height="match_parent" android:animateLayoutChanges="true"
-        android:divider="@android:drawable/divider_horizontal_dark" android:dividerHeight="5dp"/>
+        android:divider="@android:drawable/divider_horizontal_dark" android:dividerHeight="2px"
+        android:choiceMode="multipleChoiceModal"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:longClickable="false" />
 
     <TextView android:id="@android:id/empty" android:layout_width="match_parent"
         android:layout_height="match_parent" android:gravity="center" />

@@ -20,6 +20,7 @@ public class StoreConstants {
     static final public String colMRP = "MRP";
     static final public String colSellingPrice = "selling_price";
     static final String colStockAvailable = "stock_available";
+    static final public String colProductImage = "product_image";
 
     static final String tableCheckout = "CHECKOUT_ITEMS";
 
@@ -31,11 +32,12 @@ public class StoreConstants {
             colValueID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + colProductID + " INTEGER NOT NULL , " +
             colPackSize + " INTEGER, " + colUnits + " INTEGER DEFAULT 1, " + colMRP + " INTEGER NOT NULL, " +
             colSellingPrice + " INTEGER, " + colStockAvailable + " INTEGER, " +
-            "FOREIGN KEY(" + colProductID + ") REFERENCES " + tableProducts + "(" + colSerialNumber + ")  );";
+            colProductImage + " TEXT, " +
+            "FOREIGN KEY(" + colProductID + ") REFERENCES " + tableProducts + "(" + colSerialNumber + ") );";
 
     static final String CREATE_CHECKOUT_ITEMS = "CREATE TABLE IF NOT EXISTS "+ tableCheckout +  " ( " + colSerialNumber + " INTEGER, " +
             colProductName + " TEXT , " + colBrandName + " TEXT, " + colCategory + " TEXT, " + colPackSize + " INTEGER, " +
-            colUnits + " INTEGER, " + colMRP + " INTEGER NOT NULL, " + colSellingPrice + " INTEGER) ";
+            colUnits + " INTEGER, " + colMRP + " INTEGER NOT NULL, " + colSellingPrice + " INTEGER, "+ colProductImage + " TEXT )";
 
     static final String ALL_PRODUCTS = "select * from "+tableProducts+ " p inner join "+tableValues+" v on p."+colSerialNumber+
             " = v."+colProductID+";";
@@ -46,6 +48,6 @@ public class StoreConstants {
             " = v."+colProductID+" where "+colProductName+" like ?";
 
     static final String SELECTED_ITEM = "select " + colProductName + ", " + colBrandName + ", " + colCategory + ", " + colMRP + ", " +
-            colSellingPrice + " from " + tableProducts + " p inner join " + tableValues + " v on p." + colSerialNumber + " = v." +
+            colSellingPrice + ", " + colProductImage + " from " + tableProducts + " p inner join " + tableValues + " v on p." + colSerialNumber + " = v." +
             colProductID + " where " + colSerialNumber + " = ? limit 1";
 }
