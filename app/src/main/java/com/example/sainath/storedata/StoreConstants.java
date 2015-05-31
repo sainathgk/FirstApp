@@ -42,10 +42,16 @@ public class StoreConstants {
     static final String ALL_PRODUCTS = "select * from "+tableProducts+ " p inner join "+tableValues+" v on p."+colSerialNumber+
             " = v."+colProductID+";";
 
+    static final String CATEGORY_ALL_PRODUCTS = "select * from "+tableProducts+ " p inner join "+tableValues+" v on p."+colSerialNumber+
+            " = v."+colProductID+" where "+colCategory+" like ?";
+
     static final String ALL_CATEGORIES = "select distinct "+colCategory+" from "+tableProducts+";";
 
     static final String PRODUCTS_SEARCH = "select * from "+tableProducts+ " p inner join "+tableValues+" v on p."+colSerialNumber+
             " = v."+colProductID+" where "+colProductName+" like ?";
+
+    static final String CATEGORY_PRODUCTS_SEARCH = "select * from "+tableProducts+ " p inner join "+tableValues+" v on p."+colSerialNumber+
+            " = v."+colProductID+" where "+colProductName+" like ? and "+colCategory+" like ?";
 
     static final String SELECTED_ITEM = "select " + colProductName + ", " + colBrandName + ", " + colCategory + ", " + colMRP + ", " +
             colSellingPrice + ", " + colProductImage + " from " + tableProducts + " p inner join " + tableValues + " v on p." + colSerialNumber + " = v." +

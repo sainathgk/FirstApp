@@ -1,9 +1,7 @@
 package com.example.sainath.firstapp;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,12 +12,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,26 +23,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.HeaderViewListAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sainath.storedata.StoreDataProvider;
-import com.example.sainath.storedata.StoreDatabaseHelper;
-import com.example.sainath.storedata.StoreFormActivity;
-import com.example.sainath.firstapp.ItemFragment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 
 public class MainActivity extends ActionBarActivity
@@ -68,7 +55,7 @@ public class MainActivity extends ActionBarActivity
      */
     private static final int NUM_PAGES = 5;
 
-    ArrayList<String> mCategoryList;
+    private ArrayList<String> mCategoryList;
 
     public static boolean isFirst = true;
 
@@ -95,23 +82,12 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, mCategoryList != null ? mCategoryList.get(position) : UIConstants.DEFAULT_CATEGORY))
                 .commit();
     }
 
-    //TBD - change the Title of the screen
+    //Change the Title of the screen
     public void onSectionAttached(int number) {
-        /*switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }*/
         if(mCategoryList != null && mCategoryList.size() > 0)
             mTitle = mCategoryList.get(number - 1);
     }
@@ -122,7 +98,6 @@ public class MainActivity extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -207,6 +182,8 @@ public class MainActivity extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private static final String ARG_SECTION_NAME = "section_name";
+
         /**
          * The pager widget, which handles animation and allows swiping horizontally to access previous
          * and next wizard steps.
@@ -224,14 +201,19 @@ public class MainActivity extends ActionBarActivity
 
         private ItemListAdapter mListAdapter;
 
+        private int mDrawerSelection = -1;
+
+        private String mCategorySelected = null;
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, String category) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(ARG_SECTION_NAME, category);
             fragment.setArguments(args);
             return fragment;
         }
@@ -242,6 +224,9 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                   Bundle savedInstanceState) {
+            mDrawerSelection = getArguments().getInt(ARG_SECTION_NUMBER);
+            mCategorySelected = getArguments().getString(ARG_SECTION_NAME);
+
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
             final EditText searchItem = (EditText) rootView.findViewById(R.id.searchItem);
@@ -253,66 +238,56 @@ public class MainActivity extends ActionBarActivity
             mListAdapter = new ItemListAdapter(this.getActivity().getApplicationContext(), (LayoutInflater)this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
             mListAdapter.setListType("selectable");
 
-            // Instantiate a ViewPager and a PagerAdapter.
-            mPager = (ViewPager) rootView.findViewById(R.id.home_screen_offer_viewer);
-            mPagerAdapter = new ScreenSlidePagerAdapter(this.getFragmentManager());
-            mPager.setAdapter(mPagerAdapter);
+            if(mCategorySelected.equalsIgnoreCase(UIConstants.DEFAULT_CATEGORY)) {
+                // Instantiate a ViewPager and a PagerAdapter.
+                mPager = (ViewPager) rootView.findViewById(R.id.home_screen_offer_viewer);
+                mPagerAdapter = new ScreenSlidePagerAdapter(this.getFragmentManager());
+                mPager.setAdapter(mPagerAdapter);
 
-            runnable = new Runnable(){
-                public void run() {
-                    int nextItem = mPager.getCurrentItem() + 1;
-                    if(nextItem == NUM_PAGES)
-                    {
-                        nextItem = 0;
+                runnable = new Runnable() {
+                    public void run() {
+                        int nextItem = mPager.getCurrentItem() + 1;
+                        if (nextItem == NUM_PAGES) {
+                            nextItem = 0;
+                        }
+
+                        mPager.setCurrentItem(nextItem, true);
+                    }
+                };
+
+                this.getActivity().runOnUiThread(runnable);
+
+                handler.postDelayed(runnable, interval);
+
+                mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
                     }
 
-                    mPager.setCurrentItem(nextItem, true);
-                }
-            };
+                    @Override
+                    public void onPageSelected(int position) {
+                        handler.postDelayed(runnable, interval);
+                    }
 
-            this.getActivity().runOnUiThread(runnable);
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
 
-            handler.postDelayed(runnable, interval);
+                    }
+                });
+            }
+            else {
+                if(mPager != null)
+                    mPager.setVisibility(View.GONE);
 
-            mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                itemList.setVisibility(View.VISIBLE);
+                //Toast.makeText(getActivity().getApplicationContext(),"Selected Category : "+mCategorySelected, Toast.LENGTH_SHORT).show();
 
-                }
+                String[] args = {mCategorySelected};
+                mListAdapter.updateSelectionArgs(UIConstants.SearchType.CATEGORY_ALL_PRODUCTS,args);
 
-                @Override
-                public void onPageSelected(int position) {
-                    handler.postDelayed(runnable, interval);
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
-
-            itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    int[] items = new int[3];
-
-                    items[0] = (int) view.getTag();
-                    items[1] = Integer.parseInt(((TextView) view.findViewById(R.id.qty_number)).getText().toString());
-                    items[2] = Integer.parseInt(((TextView) view.findViewById(R.id.pack_size_number)).getText().toString());
-
-                    StoreDataProvider.getInstance(getActivity().getApplicationContext()).insertItemToCheckout(items);
-
-                    itemList.removeView(view);
-                    itemList.invalidate();
-                }
-            });
-
-            searchItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                }
-            });
+                itemList.setAdapter(mListAdapter);
+            }
 
             searchItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
@@ -320,7 +295,8 @@ public class MainActivity extends ActionBarActivity
 
                     cancelBtn.setVisibility(View.VISIBLE);
                     itemList.setVisibility(View.VISIBLE);
-                    mPager.setVisibility(View.GONE);
+                    if (mPager != null)
+                        mPager.setVisibility(View.GONE);
 
                     return false;
                 }
@@ -343,22 +319,38 @@ public class MainActivity extends ActionBarActivity
 
                     if(searchText == null || searchText.isEmpty() || searchText.contains(" "))
                     {
-                        cancelBtn.setVisibility(View.GONE);
-                        mPager.setVisibility(View.VISIBLE);
-                        itemList.setVisibility(View.GONE);
-                        itemList.setAdapter(null);
+                        //cancelBtn.setVisibility(View.GONE);
+                        if(mPager != null)
+                            mPager.setVisibility(View.VISIBLE);
+
+                        itemList.setVisibility(View.VISIBLE);
+
+                        String[] args = {mCategorySelected};
+                        mListAdapter.updateSelectionArgs(UIConstants.SearchType.CATEGORY_ALL_PRODUCTS, args);
+
+                        itemList.setAdapter(mListAdapter);
                     }
                     else
                     {
                         String[] args = {"%"+searchText+"%"};
-                        itemList.setAdapter(mListAdapter);
-                        mListAdapter.updateSelectionArgs(args);
 
-                        cancelBtn.setVisibility(View.VISIBLE);
-                        mPager.setVisibility(View.GONE);
+                        if(mCategorySelected.equalsIgnoreCase(UIConstants.DEFAULT_CATEGORY))
+                        {
+                            mListAdapter.updateSelectionArgs(UIConstants.SearchType.ALL_PRODUCTS_SEARCH, args);
+                        }
+                        else {
+                            //TBD add category to arguments
+                            String[] argsCategory = {"%"+searchText+"%",mCategorySelected};
+                            mListAdapter.updateSelectionArgs(UIConstants.SearchType.CATEGORY_PRODUCTS_SEARCH, argsCategory);
+                        }
+                        itemList.setAdapter(mListAdapter);
+
+                        if(mPager != null)
+                            mPager.setVisibility(View.GONE);
                         itemList.setVisibility(View.VISIBLE);
 
                         itemList.invalidate();
+                        itemList.invalidateViews();
                     }
                 }
             };

@@ -1,9 +1,8 @@
-package com.example.sainath.firstapp;
+package com.example.android.animationsdemo;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.sainath.firstapp.dummy.DummyContent;
+import com.example.android.animationsdemo.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -77,10 +75,8 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ItemListAdapter(this.getActivity().getApplicationContext(), (LayoutInflater)this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
-
-        /*mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);*/
+        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
     }
 
     @Override
@@ -104,10 +100,8 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
-/*
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-*/
         }
     }
 
@@ -117,14 +111,12 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         mListener = null;
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-            Toast.makeText(getActivity().getApplicationContext(),"Item Fragment is Clicked", Toast.LENGTH_LONG).show();
         }
     }
 

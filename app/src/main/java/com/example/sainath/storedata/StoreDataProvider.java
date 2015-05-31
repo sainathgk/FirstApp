@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.widget.Toast;
 
+import com.example.sainath.firstapp.UIConstants;
+
 import java.util.ArrayList;
 
 public class StoreDataProvider{
@@ -41,6 +43,8 @@ public class StoreDataProvider{
                 if(cursor != null) {
                     categoryList = new ArrayList<String>(cursor.getCount());
 
+                    categoryList.add(UIConstants.DEFAULT_CATEGORY);
+
                     while (cursor.moveToNext())
                     {
                         categoryList.add(cursor.getString(cursor.getColumnIndex(StoreConstants.colCategory)));
@@ -55,18 +59,33 @@ public class StoreDataProvider{
         return categoryList;
     }
 
-    public Cursor getAllItems(String[] args)
+    public Cursor getAllItems(UIConstants.SearchType searchType, String[] args)
     {
         Cursor cursor = null;
 
         try {
             if(mStoreDB != null)
             {
-                if(args != null)
-                    cursor = mStoreDB.rawQuery(StoreConstants.PRODUCTS_SEARCH,args);
-                else {
-                    //cursor = mStoreDB.rawQuery(StoreConstants.ALL_PRODUCTS, null);
-                    cursor = mStoreDB.query(StoreConstants.tableCheckout, null, null, null, null, null, null);
+                switch (searchType)
+                {
+                    case ALL_CHECKOUT_PRODUCTS:
+                        cursor = mStoreDB.query(StoreConstants.tableCheckout, null, null, null, null, null, null);
+                        break;
+
+                    case ALL_PRODUCTS_SEARCH:
+                        if(args != null)
+                            cursor = mStoreDB.rawQuery(StoreConstants.PRODUCTS_SEARCH,args);
+                        break;
+
+                    case CATEGORY_ALL_PRODUCTS:
+                        if(args != null)
+                            cursor = mStoreDB.rawQuery(StoreConstants.CATEGORY_ALL_PRODUCTS,args);
+                        break;
+
+                    case CATEGORY_PRODUCTS_SEARCH:
+                        if(args != null)
+                            cursor = mStoreDB.rawQuery(StoreConstants.CATEGORY_PRODUCTS_SEARCH,args);
+                        break;
                 }
             }
         }catch (SQLiteException e)
@@ -108,8 +127,6 @@ public class StoreDataProvider{
         ContentValues checked_items = new ContentValues();
 
         checked_items.put(StoreConstants.colSerialNumber, selected_item[0]);
-        checked_items.put(StoreConstants.colUnits, selected_item[1]);
-        checked_items.put(StoreConstants.colPackSize, selected_item[2]);
 
         if(mStoreDB != null)
         {
@@ -124,11 +141,25 @@ public class StoreDataProvider{
                 checked_items.put(StoreConstants.colSellingPrice, cursorItem.getInt(cursorItem.getColumnIndex(StoreConstants.colSellingPrice)));
                 checked_items.put(StoreConstants.colProductImage, cursorItem.getString(cursorItem.getColumnIndex(StoreConstants.colProductImage)));
 
+                checked_items.put(StoreConstants.colUnits, selected_item[1]);
+                checked_items.put(StoreConstants.colPackSize, selected_item[2]);
+
                 Long inserted = mStoreDB.insert(StoreConstants.tableCheckout, null, checked_items);
                 Toast.makeText(this.mContext, "Product is added to checkout"+inserted, Toast.LENGTH_SHORT).show();
             }
             cursorItem.close();
         }
+    }
+
+    public void updateItemToCheckout(int[] updated_item)
+    {
+        ContentValues updated_Item_values = new ContentValues();
+
+        updated_Item_values.put(StoreConstants.colUnits, updated_item[1]);
+
+        int updated = mStoreDB.update(StoreConstants.tableCheckout,updated_Item_values, StoreConstants.colSerialNumber+" =? ", new String[]{updated_item[0]+""});
+
+        Toast.makeText(mContext,"Quantity updated to DB "+updated, Toast.LENGTH_SHORT).show();
     }
 
 }

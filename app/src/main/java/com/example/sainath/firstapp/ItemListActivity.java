@@ -1,5 +1,6 @@
 package com.example.sainath.firstapp;
 
+import android.app.ListFragment;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v7.app.ActionBarActivity;
@@ -25,7 +26,7 @@ import com.example.sainath.firstapp.dummy.DummyContent;
 import com.example.sainath.storedata.StoreDataProvider;
 
 
-public class ItemListActivity extends ActionBarActivity implements ActionMode.Callback{
+public class ItemListActivity extends ActionBarActivity /*implements ActionMode.Callback*/{
 
     protected Object mActionMode = null;
     @Override
@@ -62,7 +63,7 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
 
         return super.onOptionsItemSelected(item);
     }
-
+/*
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         return false;
@@ -81,12 +82,13 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
     @Override
     public void onDestroyActionMode(ActionMode mode) {
 
-    }
+    }*/
 
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment implements ActionMode.Callback{
+    public static class PlaceholderFragment extends Fragment implements /*ActionMode.Callback,*/
+            AbsListView.OnItemClickListener, AbsListView.OnItemLongClickListener {
 
         /**
          * The fragment's ListView/GridView.
@@ -111,7 +113,9 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
             // TODO: Change Adapter to display your content
 
             mAdapter = new ItemListAdapter(this.getActivity().getApplicationContext(), (LayoutInflater)this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+            mAdapter.updateSelectionArgs(UIConstants.SearchType.ALL_CHECKOUT_PRODUCTS,null);
             mAdapter.setListType("normal");
+
             /*mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);*/
         }
@@ -125,8 +129,11 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
 
             // Set the adapter
             mListView = (ListView) view.findViewById(android.R.id.list);
-            mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+            //mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
             mListView.setAdapter(mAdapter);
+
+            mListView.setOnItemClickListener(this);
+            mListView.setOnItemLongClickListener(this);
 
             /*mAdapter.registerDataSetObserver(new DataSetObserver() {
                 @Override
@@ -154,12 +161,12 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
             });*/
 
             // Set OnItemClickListener so we can be notified on item clicks
-            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Toast.makeText(getActivity().getApplicationContext(), "List Item OnClick", Toast.LENGTH_LONG).show();
-                    /*int[] items = new int[3];
+                    *//*int[] items = new int[3];
 
                     items[0] = (int) view.getTag();
                     items[1] = Integer.parseInt(((TextView) view.findViewById(R.id.qty_number)).getText().toString());
@@ -168,7 +175,7 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
                     StoreDataProvider.getInstance(getActivity().getApplicationContext()).insertItemToCheckout(items);
 
                     mListView.removeView(view);
-                    mListView.invalidate();*/
+                    mListView.invalidate();*//*
                 }
             });
 
@@ -180,7 +187,7 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
                     view.setSelected(true);
                     return true;
                 }
-            });
+            });*/
 
             mListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
                 @Override
@@ -217,9 +224,9 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
         public void onDetach() {
             super.onDetach();
 
-            //mAdapter.closeCursor();
+            mAdapter.closeCursor();
         }
-
+/*
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             return false;
@@ -238,6 +245,19 @@ public class ItemListActivity extends ActionBarActivity implements ActionMode.Ca
         @Override
         public void onDestroyActionMode(ActionMode mode) {
 
+        }*/
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Toast.makeText(getActivity().getApplicationContext(),"On Item Click", Toast.LENGTH_LONG).show();
         }
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            Toast.makeText(getActivity().getApplicationContext(),"On Item Long Click", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+
     }
 }
